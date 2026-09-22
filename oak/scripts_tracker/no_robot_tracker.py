@@ -2,24 +2,12 @@
 import cv2
 import numpy as np
 import sys
-sys.path.insert(0, "third_party/depthai_hand_tracker")
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'third_party', 'depthai_hand_tracker'))
 from HandTracker import HandTracker
+from HandTrackerRenderer import HandTrackerRenderer
 import argparse
-from SvayaAPI.CartesianPose import CartesianPose
-from SvayaAPI.clientApi import SvayaApi
 import time
-IP = "localhost"
-ROBOT_NAME = "six_axis"
-robot = SvayaApi()
-
-def error_callback(error_priority, errpr_msg, error_status):
-    print("Error:", error_priority, errpr_msg, error_status)
-    if error_priority == "info":
-        print("Info:", errpr_msg,error_status)
-    elif error_priority == "medium":
-        print("Medium:", errpr_msg,error_status)
-    elif error_priority == "high":
-        print("High:", errpr_msg,error_status)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-e', '--edge', action="store_true",
@@ -97,53 +85,50 @@ pinch_threshold = 60
 old_state = False
 points_to_label = []
 is_pinching = False
+pos_des = []
 
-print("Connecting to robot...")
-robot.initialize(IP,error_callback,ROBOT_NAME)
-print("Connected to robot.")
-input("enter to enable ...")
-robot.enableRobot()
-time.sleep(1)
-repeat = True
-robot.moveJoints([90,30,90,0,-30,0],50.0,50.0)
-time.sleep(1)
-cartPose = CartesianPose([-10,733,150,-90,0,0])
-robot.moveToCartPose(cartPose)
-robot.setJogSpeed(50)
-while True:
-    # Run hand tracker on next frame
-    # 'bag' contains some information related to the frame 
-    # and not related to a particular hand like body keypoints in Body Pre Focusing mode
-    # Currently 'bag' contains meaningful information only when Body Pre Focusing is used
-    frame, hands, bag = tracker.next_frame()
-       
-    if frame is None: break
-    # Draw hands
-    frame = renderer.draw(frame, hands, bag)
-    for hand in hands:
-        thumb_tip = np.array(hand.landmarks[4])
-        index_tip = np.array(hand.landmarks[8])
-        hand_pos = np.array(hand.xyz)
-        distance = np.linalg.norm(thumb_tip - index_tip)
+start_time = time.perf_counter()
+is_pinching = False
+try:
+    while True:
+        frame, hands, bag = tracker.next_frame()
+        if frame is None:
+            break
 
-        is_pinching = distance < pinch_threshold
-    
+        frame = renderer.draw(frame, hands, bag)
+        for hand in hands:
+            thumb_tip = np.array(hand.landmarks[4])
+            index_tip = np.array(hand.landmarks[8])
+            current_time = start_time - time.perf_counter()
+            hand_pos = hand.xyz
+            distance = np.linalg.norm(thumb_tip - index_tip)
+            is_pinching = distance < pinch_threshold
 
-    if is_pinching == True:
-        label = f"{hand_pos[0]:.3f},{hand_pos[1]:.3f},{hand_pos[2]:.3f}"
-        text_pos = tuple(hand.landmarks[0][:2].astype(int))
-        points_to_label.append((label,text_pos))
-        cartPose = CartesianPose([float(hand_pos[0]),float(hand_pos[2]),120.0+float(hand_pos[1]),-90.0,0.0,0.0])
-        robot.moveToCartPose(cartPose)
-        time.sleep(1)
-    old_state = is_pinching
-    color = (0,0,255)
-    for label,text_pos in points_to_label:
-        cv2.putText(frame, label,text_pos, cv2.FONT_HERSHEY_SIMPLEX,
-            0.8, color, 2)
-    cv2.imshow("hand tracker", frame)
-    if cv2.waitKey(1) == 27:  # Esc to quit
-        break
-    
-renderer.exit()
-tracker.exit()
+            if is_pinching:
+                label = f"{hand_pos[0]:.3f},{hand_pos[1]:.3f},{hand_pos[2]:.3f}"
+                text_pos = tuple(hand.landmarks[0][:2].astype(int))
+                points_to_label.append((label, text_pos))
+                if len(pos_des) < 2:
+                    pos_des.append([hand_pos,current_time])
+                    vel_des = [0,0,0]
+                else:
+                    pos_des[0] = pos_des[1]
+                    pos_des[1] = [hand_pos,current_time]
+                    vel_des = (pos_des[1][0]-pos_des[0][0])/(pos_des[1][1]-pos_des[0][1])
+                # print(pos_des)
+                print(vel_des)
+
+        # color = (0, 0, 255)
+        # for label, text_pos in points_to_label:
+        #     cv2.putText(frame, label, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+
+        cv2.imshow("hand tracker", frame)
+        if cv2.waitKey(1) == 27:  # Esc to quit
+            break
+
+except KeyboardInterrupt:
+    print("Interrupted by user")
+finally:
+    renderer.exit()
+    tracker.exit()
+    cv2.destroyAllWindows()
