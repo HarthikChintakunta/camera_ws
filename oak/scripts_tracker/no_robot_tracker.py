@@ -8,6 +8,9 @@ from HandTracker import HandTracker
 from HandTrackerRenderer import HandTrackerRenderer
 import argparse
 import time
+import matplotlib.pyplot as plt
+from collections import deque
+from mpl_toolkits.mplot3d import Axes3D 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-e', '--edge', action="store_true",
@@ -81,14 +84,61 @@ tracker = HandTracker(
 renderer = HandTrackerRenderer(
         tracker=tracker,
         output=args.output)
-pinch_threshold = 60
-old_state = False
-points_to_label = []
-is_pinching = False
-pos_des = []
 
+# 1. Initialize fixed-size windows for 3D coordinates (Spatial Data)
+MAX_SAMPLES = 100
+x_data = deque(maxlen=MAX_SAMPLES)
+y_data = deque(maxlen=MAX_SAMPLES)
+z_data = deque(maxlen=MAX_SAMPLES)
+
+# 2. Initialize rolling windows for Velocity and Time
+v_time_data = deque(maxlen=MAX_SAMPLES)
+x_vel_data = deque(maxlen=MAX_SAMPLES)
+y_vel_data = deque(maxlen=MAX_SAMPLES)
+z_vel_data = deque(maxlen=MAX_SAMPLES)
+
+plt.ion()
+
+# --- PLOT SETUP: Window 1 (3D Position) ---
+fig_3d = plt.figure(1)
+ax_3d = fig_3d.add_subplot(projection='3d')
+path_line, = ax_3d.plot([], [], [], 'b-', label='Trailing Path')
+current_pos, = ax_3d.plot([], [], [], 'ro', markersize=8, label='Object')
+ax_3d.set_xlabel('X')
+ax_3d.set_ylabel('Y')
+ax_3d.set_zlabel('Z')
+ax_3d.legend()
+
+BOX_MIN, BOX_MAX = -500, 500
+ax_3d.set_xlim(BOX_MIN, BOX_MAX)
+ax_3d.set_ylim(BOX_MIN, BOX_MAX)
+ax_3d.set_zlim(500, 1500)
+
+# --- PLOT SETUP: Window 2 (2D Live Velocity) ---
+fig_vel, ax_vel = plt.subplots(num=2)
+vx_line, = ax_vel.plot([], [], 'r-', label='Filtered X Vel')
+vy_line, = ax_vel.plot([], [], 'g-', label='Filtered Y Vel')
+vz_line, = ax_vel.plot([], [], 'b-', label='Filtered Z Vel')
+ax_vel.set_xlabel('Time (s)')
+ax_vel.set_ylabel('Velocity (units/s)')
+ax_vel.set_ylim(-2000, 2000) 
+ax_vel.legend()
+ax_vel.grid(True)
+
+pinch_threshold = 50
 start_time = time.perf_counter()
-is_pinching = False
+
+# --- ALPHA-BETA FILTER INITIALIZATION ---
+# Tuning constants: adjust these to balance responsiveness vs. smoothness
+ALPHA = 0.4   
+BETA = 0.2    
+
+# Track filter states across iterations (X, Y, Z)
+filter_pos = None  # Will hold np.array([x, y, z])
+filter_vel = np.array([0.0, 0.0, 0.0])
+last_time = None
+# ----------------------------------------
+
 try:
     while True:
         frame, hands, bag = tracker.next_frame()
@@ -99,36 +149,78 @@ try:
         for hand in hands:
             thumb_tip = np.array(hand.landmarks[4])
             index_tip = np.array(hand.landmarks[8])
-            current_time = start_time - time.perf_counter()
-            hand_pos = hand.xyz
+            
+            current_time = time.perf_counter() - start_time
+            hand_pos = np.array(hand.xyz) # Make sure this is a numpy array
             distance = np.linalg.norm(thumb_tip - index_tip)
             is_pinching = distance < pinch_threshold
 
             if is_pinching:
-                label = f"{hand_pos[0]:.3f},{hand_pos[1]:.3f},{hand_pos[2]:.3f}"
-                text_pos = tuple(hand.landmarks[0][:2].astype(int))
-                points_to_label.append((label, text_pos))
-                if len(pos_des) < 2:
-                    pos_des.append([hand_pos,current_time])
-                    vel_des = [0,0,0]
+                # --- RUN ALPHA-BETA FILTER ---
+                if filter_pos is None or last_time is None:
+                    # First sample: Initialize positions with raw data, velocities at zero
+                    filter_pos = hand_pos.copy()
+                    filter_vel = np.array([0.0, 0.0, 0.0])
+                    dt = 0.001 # Small default step
                 else:
-                    pos_des[0] = pos_des[1]
-                    pos_des[1] = [hand_pos,current_time]
-                    vel_des = (pos_des[1][0]-pos_des[0][0])/(pos_des[1][1]-pos_des[0][1])
-                # print(pos_des)
-                print(vel_des)
+                    dt = current_time - last_time
+                    if dt <= 0:  # Safety check for fast frame updates
+                        dt = 0.001
+                    
+                    # 1. State Prediction Step
+                    pred_pos = filter_pos + (filter_vel * dt)
+                    
+                    # 2. Residual Calculation Step
+                    residual = hand_pos - pred_pos
+                    
+                    # 3. State Correction Step
+                    filter_pos = pred_pos + (ALPHA * residual)
+                    filter_vel = filter_vel + ((BETA / dt) * residual)
+                
+                last_time = current_time
+                # ------------------------------
 
-        # color = (0, 0, 255)
-        # for label, text_pos in points_to_label:
-        #     cv2.putText(frame, label, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+                # Append Filtered 3D Positions to queues
+                x_data.append(filter_pos[0])
+                y_data.append(filter_pos[1])
+                z_data.append(filter_pos[2])
+                
+                # Append Filtered Velocities and Times to queues
+                v_time_data.append(current_time)
+                x_vel_data.append(filter_vel[0])
+                y_vel_data.append(filter_vel[1])
+                z_vel_data.append(filter_vel[2])
+
+                # Update 3D Canvas
+                path_line.set_data(list(x_data), list(y_data))
+                path_line.set_3d_properties(list(z_data))
+                current_pos.set_data([filter_pos[0]], [filter_pos[1]])
+                current_pos.set_3d_properties([filter_pos[2]])
+                
+                # Update 2D Velocity Canvas
+                vx_line.set_data(list(v_time_data), list(x_vel_data))
+                vy_line.set_data(list(v_time_data), list(y_vel_data))
+                vz_line.set_data(list(v_time_data), list(z_vel_data))
+                
+                if len(v_time_data) > 0:
+                    ax_vel.set_xlim(v_time_data[0], v_time_data[-1] + 0.5)
+            else:
+                # If they stop pinching, reset the filter memory for the next stroke
+                filter_pos = None
+                last_time = None
+
+        fig_3d.canvas.draw()
+        fig_3d.canvas.flush_events()
+        fig_vel.canvas.draw()
+        fig_vel.canvas.flush_events()
 
         cv2.imshow("hand tracker", frame)
         if cv2.waitKey(1) == 27:  # Esc to quit
             break
 
-except KeyboardInterrupt:
-    print("Interrupted by user")
+except Exception as e:
+    print(f"An error occurred: {e}")
 finally:
-    renderer.exit()
-    tracker.exit()
     cv2.destroyAllWindows()
+    plt.close('all')
+    plt.ioff()

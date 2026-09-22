@@ -121,6 +121,7 @@ try:
             break
 
         frame = renderer.draw(frame, hands, bag)
+        is_pinching = False
         for hand in hands:
             thumb_tip = np.array(hand.landmarks[4])
             index_tip = np.array(hand.landmarks[8])
