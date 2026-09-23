@@ -1,0 +1,102 @@
+﻿MASS PROPERTIES OF THE ASSEMBLY J3_CS
+
+VOLUME =  1.0103912e+06  MM^3
+SURFACE AREA =  5.3960881e+05  MM^2
+AVERAGE DENSITY =  3.4869993e-06 KILOGRAM / MM^3
+MASS =  3.5232334e+00 KILOGRAM 
+CENTER OF GRAVITY with respect to _J3_CS coordinate frame:
+X   Y   Z     1.3563383e-01 -2.1171835e+01  7.7271269e+01  MM
+
+INERTIA with respect to _J3_CS coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  3.1982320e+04 -1.5528529e+01 -4.8994800e+01
+Iyx Iyy Iyz -1.5528529e+01  2.8261283e+04  7.1406845e+03
+Izx Izy Izz -4.8994800e+01  7.1406845e+03  8.8063347e+03
+
+INERTIA at CENTER OF GRAVITY with respect to _J3_CS coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  9.3663477e+03 -2.5645906e+01 -1.2069206e+01
+Iyx Iyy Iyz -2.5645906e+01  7.2245233e+03  1.3767641e+03
+Izx Izy Izz -1.2069206e+01  1.3767641e+03  7.2269924e+03
+
+PRINCIPAL MOMENTS OF INERTIA:  (KILOGRAM * MM^2)
+I1  I2  I3   5.8489669e+03  8.6015929e+03  9.3673036e+03
+
+ROTATION MATRIX from _J3_CS orientation to PRINCIPAL AXES:
+       0.00273        0.03484        0.99939
+       0.70744        0.70627       -0.02656
+      -0.70677        0.70708       -0.02272
+
+ROTATION ANGLES from _J3_CS orientation to PRINCIPAL AXES (degrees):
+angles about x  y  z 130.545         87.997        -85.515 
+
+RADII OF GYRATION with respect to PRINCIPAL AXES:
+R1  R2  R3 4.0744489e+01  4.9410441e+01  5.1562811e+01  MM
+
+---------------------------------------------
+
+MASS PROPERTIES OF COMPONENTS OF THE ASSEMBLY
+(in assembly units and the _J3_CS coordinate frame)
+
+   DENSITY             MASS          C.G.:  X        Y         Z
+
+                         IMF16KG            MATERIAL:                               AL6061
+         2.71020e-06  4.88956e-01  0.00000e+00  0.00000e+00  1.19277e+01
+               03PLGSSA1206PT_00            MATERIAL:                               AL6061
+         2.71020e-06  9.78605e-02  0.00000e+00  0.00000e+00  3.86574e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03 -1.37766e+01  3.32597e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03 -2.54558e+01  2.54558e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03 -3.32597e+01  1.37766e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03 -3.32597e+01 -1.37766e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03 -2.54558e+01 -2.54558e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03 -1.37766e+01 -3.32597e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03  1.37766e+01 -3.32597e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03  2.54558e+01 -2.54558e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03  3.32597e+01 -1.37766e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03  3.32597e+01  1.37766e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03  2.54558e+01  2.54558e+01  3.14775e+01
+              ISO14580-M4X16-4_8            MATERIAL:                                  4_8
+         7.85000e-06  2.37975e-03  1.37766e+01  3.32597e+01  3.14775e+01
+              B17HFU01S0000PT-00            MATERIAL:                              UNKNOWN
+         3.75252e-06  2.73206e+00  1.74921e-01 -2.22943e+01  8.98984e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04  4.85286e+00  1.81111e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04 -4.85286e+00  1.81111e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04 -1.32583e+01  1.32583e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04 -1.81111e+01  4.85286e+00  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04 -1.81111e+01 -4.85286e+00  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04 -1.32583e+01 -1.32583e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04 -4.85286e+00 -1.81111e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04  4.85286e+00 -1.81111e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04  1.32583e+01 -1.32583e+01  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04  1.81111e+01 -4.85286e+00  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04  1.81111e+01  4.85286e+00  4.22061e+01
+              ISO14580-M3X10-4_8            MATERIAL:                                  4_8
+         7.85000e-06  9.29639e-04  1.32583e+01  1.32583e+01  4.22061e+01
+           JTSB17HFU01S0000PT_04            MATERIAL:                               AL6061
+         2.71020e-06  1.29053e-01  0.00000e+00 -8.47336e+01  9.50658e+01
+                          17RING            MATERIAL:                               AL6061
+         2.71020e-06  3.55931e-02  0.00000e+00 -7.72307e+01  9.50658e+01

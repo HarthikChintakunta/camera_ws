@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<robot name="six-axis" xmlns:xacro="http://www.ros.org/wiki/xacro"
+    xmlns:ros2_control="http://www.ros.org/wiki/ros2_control">
+
+    <!-- Define gray color -->
+    <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0" />
+    </material>
+
+    <!-- Define silver color -->
+    <material name="silver">
+        <color rgba="0.75 0.75 0.75 1.0" />
+    </material>
+
+
+    <link name="world"></link>
+
+    <joint name="joint0" type="fixed">
+        <origin xyz="0.0 0.0 0.05543" rpy="0.0 0.0 0.0" />
+        <parent link="world" />
+        <child link="link0" />
+        <axis xyz="0.0 0.0 0.0" />
+        <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link0">
+        <inertial>
+            <origin xyz="1.3836189e-02 8.2283341e-05 -3.0518959e-02" rpy="0 0 0" />
+            <mass value="2.3191472e+00" />
+            <inertia
+                ixx="9.3895308e-03" ixy="0.0" ixz="1.1882474e-03"
+                iyx="0.0" iyy="1.4207390e-02" iyz="9.2874266e-06"
+                izx="1.1882474e-03" izy="9.2874266e-06" izz="1.7661948e-02" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/base_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+    <joint name="joint1" type="revolute">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <parent link="link0" />
+        <child link="link1" />
+        <axis xyz="0.0 0.0 1.0" />
+        <limit lower="-${pi}" upper="${pi}" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link1">
+        <inertial>
+            <origin xyz="-1.0907883e-04 -7.4292695e-03  9.3784985e-02" rpy="0 0 0" />
+            <mass value="1.0588208e+01" />
+            <inertia
+                ixx="1.3778118e-01" ixy="5.1395441e-06" ixz="2.1163457e-04"
+                iyx="5.1395441e-06" iyy="1.3826689e-01" iyz="1.1751288e-02"
+                izx="2.1163457e-04" izy="1.1751288e-02" izz="3.5020186e-02" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/j1_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+    <joint name="joint2" type="revolute">
+        <origin xyz="0.0 -0.07856 0.14457" rpy="-${pi/2} -${pi/2} 0.0" />
+        <parent link="link1" />
+        <child link="link2" />
+        <axis xyz="0.0 0.0 1.0" />
+        <limit lower="-${pi}" upper="${pi}" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link2">
+        <inertial>
+            <origin xyz="2.2958192e-01 2.1055824e-06 -1.0658760e-01" rpy="0 0 0" />
+            <mass value="2.0131595e+01" />
+            <inertia
+                ixx="3.0748764e-01" ixy="6.7843715e-04" ixz="5.3405347e-01"
+                iyx="6.7843715e-04" iyy=" 2.7959405e+00" iyz="1.2124656e-06"
+                izx="5.3405347e-01" izy="1.2124656e-06" izz="2.5464575e+00" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/j2_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+    <joint name="joint3" type="revolute">
+        <origin xyz="0.5980 0.0 -0.02651" rpy="0.0 0.0 ${pi/2}" />
+        <parent link="link2" />
+        <child link="link3" />
+        <axis xyz="0.0 0.0 1.0" />
+        <limit lower="-${pi}" upper="${pi}" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link3">
+        <inertial>
+            <origin xyz="1.3563383e-04 -2.1171835e-02 7.7271269e-02" rpy="0 0 0" />
+            <mass value="3.5232334e+00" />
+            <inertia
+                ixx="3.1982320e-02" ixy="-1.5528529e-05" ixz="-4.8994800e-05"
+                iyx="-1.5528529e-05" iyy="2.8261283e-02" iyz="7.1406845e-03"
+                izx="-4.8994800e-05" izy="7.1406845e-03" izz="8.8063347e-03" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/j3_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0 " rpy="0.0 0.0 0.0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+    <joint name="joint4" type="revolute">
+        <origin xyz="0.0 -0.09318 0.09507" rpy="${pi/2} 0.0 0.0" />
+        <parent link="link3" />
+        <child link="link4" />
+        <axis xyz="0.0 0.0 1.0" />
+        <limit lower="-${pi}" upper="${pi}" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link4">
+        <inertial>
+            <origin xyz="-1.8827546e-04 -1.0283985e-01 3.7595353e-01" rpy="0.0 0.0 0.0" />
+            <mass value="4.2451539e+00" />
+            <inertia
+                ixx="7.4090397e-01" ixy="-1.0099759e-04" ixz="2.7732097e-04"
+                iyx="-1.0099759e-04" iyy="6.8706172e-01" iyz="1.8586213e-01"
+                izx="2.7732097e-04" izy="1.8586213e-01" izz="5.9281246e-02" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/j4_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+    <joint name="joint5" type="revolute">
+        <!-- -0.012 adjusted in z -->
+        <origin xyz="0.0 -0.05124 0.45882" rpy="-${pi/2} 0.0 0.0" />
+        <parent link="link4" />
+        <child link="link5" />
+        <axis xyz="0.0 0.0 1.0" />
+        <limit lower="-${pi}" upper="${pi}" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link5">
+        <inertial>
+            <origin xyz="1.6454691e-04 -2.5891823e-02 4.6378786e-02" rpy="0.0 0.0 0.0" />
+            <mass value="2.9041438e+00" />
+            <inertia
+                ixx="1.3754675e-02" ixy="-1.5528630e-05" ixz="-2.8051809e-05"
+                iyx="-1.5528630e-05" iyy="9.9916676e-03" iyz="3.9023300e-03"
+                izx="-2.8051809e-05" izy="3.9023300e-03" izz="7.6137437e-03" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/j5_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0 " rpy="0.0 0.0 0.0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+
+    <joint name="joint6" type="revolute">
+        <origin xyz="0.0 -0.09318 0.05124" rpy="${pi/2} 0.0 0.0" />
+        <parent link="link5" />
+        <child link="link6" />
+        <axis xyz="0.0 0.0 1.0" />
+        <limit lower="-${pi}" upper="${pi}" effort="0.0" velocity="0.0" />
+    </joint>
+
+    <link name="link6">
+        <inertial>
+            <origin xyz="-5.3585525e-04 9.9984934e-05 2.2958261e-02" rpy="0.0 0.0 0.0" />
+            <mass value="5.9999959e-01" />
+            <inertia
+                ixx="9.3016047e-04" ixy="-2.9405026e-07" ixz="1.0421409e-05"
+                iyx="-2.9405026e-07" iyy="9.5021553e-04" iyz="-1.7371494e-06"
+                izx="1.0421409e-05" izy="-1.7371494e-06" izz="8.4567154e-04" />
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://state_machine/urdf/meshes_10_kg/j6_cs_sw0001.stl" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <material name="silver" />
+        </visual>
+    </link>
+
+</robot>

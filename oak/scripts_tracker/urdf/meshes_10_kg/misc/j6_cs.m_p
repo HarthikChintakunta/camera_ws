@@ -1,0 +1,46 @@
+﻿MASS PROPERTIES OF THE ASSEMBLY J6_CS
+
+VOLUME =  1.9668087e+05  MM^3
+SURFACE AREA =  9.0853424e+04  MM^2
+AVERAGE DENSITY =  3.0506251e-06 KILOGRAM / MM^3
+MASS =  5.9999959e-01 KILOGRAM 
+CENTER OF GRAVITY with respect to _J6_CS coordinate frame:
+X   Y   Z    -5.3585525e-01  9.9984934e-02  2.2958261e+01  MM
+
+INERTIA with respect to _J6_CS coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  9.3016047e+02 -2.9405026e-01  1.0421409e+01
+Iyx Iyy Iyz -2.9405026e-01  9.5021553e+02 -1.7371494e+00
+Izx Izy Izz  1.0421409e+01 -1.7371494e+00  8.4567154e+02
+
+INERTIA at CENTER OF GRAVITY with respect to _J6_CS coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  6.1390563e+02 -3.2619671e-01  3.0400315e+00
+Iyx Iyy Iyz -3.2619671e-01  6.3379441e+02 -3.5986220e-01
+Izx Izy Izz  3.0400315e+00 -3.5986220e-01  8.4549326e+02
+
+PRINCIPAL MOMENTS OF INERTIA:  (KILOGRAM * MM^2)
+I1  I2  I3   6.1386055e+02  6.3379896e+02  8.4553378e+02
+
+ROTATION MATRIX from _J6_CS orientation to PRINCIPAL AXES:
+       0.99978       -0.01610        0.01313
+       0.01612        0.99987       -0.00172
+      -0.01310        0.00193        0.99991
+
+ROTATION ANGLES from _J6_CS orientation to PRINCIPAL AXES (degrees):
+angles about x  y  z   0.099          0.752          0.923 
+
+RADII OF GYRATION with respect to PRINCIPAL AXES:
+R1  R2  R3 3.1985960e+01  3.2501267e+01  3.7539632e+01  MM
+
+---------------------------------------------
+
+MASS PROPERTIES OF COMPONENTS OF THE ASSEMBLY
+(in assembly units and the _J6_CS coordinate frame)
+
+   DENSITY             MASS          C.G.:  X        Y         Z
+
+          TFI00S0000PT_00_SW0001            MATERIAL:                         MATERIAL_TIO
+         3.05063e-06  6.00000e-01 -5.35855e-01  9.99849e-02  2.29583e+01

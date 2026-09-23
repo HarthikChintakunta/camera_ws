@@ -1,0 +1,74 @@
+﻿MASS PROPERTIES OF THE ASSEMBLY J5_CS
+
+VOLUME =  7.8975813e+05  MM^3
+SURFACE AREA =  4.5450940e+05  MM^2
+AVERAGE DENSITY =  3.6772573e-06 KILOGRAM / MM^3
+MASS =  2.9041438e+00 KILOGRAM 
+CENTER OF GRAVITY with respect to _J5_CS coordinate frame:
+X   Y   Z     1.6454691e-01 -2.5891823e+01  4.6378786e+01  MM
+
+INERTIA with respect to _J5_CS coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  1.3754675e+04 -1.5528630e+01 -2.8051809e+01
+Iyx Iyy Iyz -1.5528630e+01  9.9916676e+03  3.9023300e+03
+Izx Izy Izz -2.8051809e+01  3.9023300e+03  7.6137437e+03
+
+INERTIA at CENTER OF GRAVITY with respect to _J5_CS coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  5.5609862e+03 -2.7901501e+01 -5.8888767e+00
+Iyx Iyy Iyz -2.7901501e+01  3.7447994e+03  4.1494313e+02
+Izx Izy Izz -5.8888767e+00  4.1494313e+02  5.6667662e+03
+
+PRINCIPAL MOMENTS OF INERTIA:  (KILOGRAM * MM^2)
+I1  I2  I3   3.6586827e+03  5.5606662e+03  5.7532028e+03
+
+ROTATION MATRIX from _J5_CS orientation to PRINCIPAL AXES:
+       0.01374       -0.99814       -0.05938
+       0.97923        0.00141        0.20276
+      -0.20230       -0.06093        0.97743
+
+ROTATION ANGLES from _J5_CS orientation to PRINCIPAL AXES (degrees):
+angles about x  y  z -11.720         -3.404         89.212 
+
+RADII OF GYRATION with respect to PRINCIPAL AXES:
+R1  R2  R3 3.5493867e+01  4.3757687e+01  4.4508789e+01  MM
+
+---------------------------------------------
+
+MASS PROPERTIES OF COMPONENTS OF THE ASSEMBLY
+(in assembly units and the _J5_CS coordinate frame)
+
+   DENSITY             MASS          C.G.:  X        Y         Z
+
+              B17HFU01S0000PT-00            MATERIAL:                              UNKNOWN
+         3.75252e-06  2.73206e+00  1.74921e-01 -2.22943e+01  4.60726e+01
+           JTSB17HFU01S0000PT_04            MATERIAL:                               AL6061
+         2.71020e-06  1.29053e-01  0.00000e+00 -8.47336e+01  5.12400e+01
+               ISO14581-M3X8-4_8            MATERIAL:                                  4_8
+         7.85000e-06  5.32319e-04  3.59177e+01 -8.06800e+01  7.19771e+01
+               ISO14581-M3X8-4_8            MATERIAL:                                  4_8
+         7.85000e-06  5.32319e-04  0.00000e+00 -8.06800e+01  9.27142e+01
+               ISO14581-M3X8-4_8            MATERIAL:                                  4_8
+         7.85000e-06  5.32319e-04 -3.59177e+01 -8.06800e+01  7.19771e+01
+               ISO14581-M3X8-4_8            MATERIAL:                                  4_8
+         7.85000e-06  5.32319e-04 -3.59177e+01 -8.06800e+01  3.05029e+01
+               ISO14581-M3X8-4_8            MATERIAL:                                  4_8
+         7.85000e-06  5.32319e-04  0.00000e+00 -8.06800e+01  9.76585e+00
+               ISO14581-M3X8-4_8            MATERIAL:                                  4_8
+         7.85000e-06  5.32319e-04  3.59177e+01 -8.06800e+01  3.05029e+01
+               ISO14580-M3X6-4_8            MATERIAL:                                  4_8
+         7.85000e-06  7.07686e-04 -2.08636e+01 -8.06800e+01  1.51032e+01
+               ISO14580-M3X6-4_8            MATERIAL:                                  4_8
+         7.85000e-06  7.07686e-04 -4.17272e+01 -8.06800e+01  5.12400e+01
+               ISO14580-M3X6-4_8            MATERIAL:                                  4_8
+         7.85000e-06  7.07686e-04 -2.08636e+01 -8.06800e+01  8.73768e+01
+               ISO14580-M3X6-4_8            MATERIAL:                                  4_8
+         7.85000e-06  7.07686e-04  2.08636e+01 -8.06800e+01  8.73768e+01
+               ISO14580-M3X6-4_8            MATERIAL:                                  4_8
+         7.85000e-06  7.07686e-04  4.17272e+01 -8.06800e+01  5.12400e+01
+               ISO14580-M3X6-4_8            MATERIAL:                                  4_8
+         7.85000e-06  7.07686e-04  2.08636e+01 -8.06800e+01  1.51032e+01
+                          17RING            MATERIAL:                               AL6061
+         2.71020e-06  3.55931e-02  0.00000e+00 -7.72307e+01  5.12400e+01

@@ -125,12 +125,23 @@ ax_vel.set_ylim(-2000, 2000)
 ax_vel.legend()
 ax_vel.grid(True)
 
-pinch_threshold = 50
+# --- PLOT SETUP: Window 2 (2D Live Pos) ---
+fig_pos, ax_pos = plt.subplots(num=3)
+px_line, = ax_pos.plot([], [], 'r-', label='Filtered X Pos')
+py_line, = ax_pos.plot([], [], 'g-', label='Filtered Y Pos')
+pz_line, = ax_pos.plot([], [], 'b-', label='Filtered Z Pos')
+ax_pos.set_xlabel('Time (s)')
+ax_pos.set_ylabel('Pos (units)')
+ax_pos.set_ylim(-1000, 1000) 
+ax_pos.legend()
+ax_pos.grid(True)
+
+pinch_threshold = 30
 start_time = time.perf_counter()
 
 # --- ALPHA-BETA FILTER INITIALIZATION ---
 # Tuning constants: adjust these to balance responsiveness vs. smoothness
-ALPHA = 0.4   
+ALPHA = 0.3   
 BETA = 0.2    
 
 # Track filter states across iterations (X, Y, Z)
@@ -153,6 +164,7 @@ try:
             current_time = time.perf_counter() - start_time
             hand_pos = np.array(hand.xyz) # Make sure this is a numpy array
             distance = np.linalg.norm(thumb_tip - index_tip)
+            print(distance)
             is_pinching = distance < pinch_threshold
 
             if is_pinching:
@@ -164,8 +176,8 @@ try:
                     dt = 0.001 # Small default step
                 else:
                     dt = current_time - last_time
-                    if dt <= 0:  # Safety check for fast frame updates
-                        dt = 0.001
+                    # if dt <= 0:  # Safety check for fast frame updates
+                    #     dt = 0.001
                     
                     # 1. State Prediction Step
                     pred_pos = filter_pos + (filter_vel * dt)
@@ -196,7 +208,13 @@ try:
                 path_line.set_3d_properties(list(z_data))
                 current_pos.set_data([filter_pos[0]], [filter_pos[1]])
                 current_pos.set_3d_properties([filter_pos[2]])
-                
+
+                # Update 2D Pos Canvas
+                px_line.set_data(list(v_time_data), list(x_data))
+                py_line.set_data(list(v_time_data), list(y_data))
+                pz_line.set_data(list(v_time_data), list(z_data))
+                if len(v_time_data) > 0:
+                    ax_pos.set_xlim(v_time_data[0], v_time_data[-1] + 0.5)
                 # Update 2D Velocity Canvas
                 vx_line.set_data(list(v_time_data), list(x_vel_data))
                 vy_line.set_data(list(v_time_data), list(y_vel_data))
@@ -213,7 +231,9 @@ try:
         fig_3d.canvas.flush_events()
         fig_vel.canvas.draw()
         fig_vel.canvas.flush_events()
-
+        fig_pos.canvas.draw()
+        fig_pos.canvas.flush_events()
+        time.sleep(0.001)
         cv2.imshow("hand tracker", frame)
         if cv2.waitKey(1) == 27:  # Esc to quit
             break

@@ -1,0 +1,46 @@
+﻿MASS PROPERTIES OF THE ASSEMBLY BASE
+
+VOLUME =  7.9034494e+05  MM^3
+SURFACE AREA =  1.8600076e+05  MM^2
+AVERAGE DENSITY =  2.9343482e-06 KILOGRAM / MM^3
+MASS =  2.3191472e+00 KILOGRAM 
+CENTER OF GRAVITY with respect to _BASE coordinate frame:
+X   Y   Z     1.3836189e+01  8.2283341e-02 -3.0518959e+01  MM
+
+INERTIA with respect to _BASE coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  9.3895308e+03  0.0000000e+00  1.1882474e+03
+Iyx Iyy Iyz  0.0000000e+00  1.4207390e+04  9.2874266e+00
+Izx Izy Izz  1.1882474e+03  9.2874266e+00  1.7661948e+04
+
+INERTIA at CENTER OF GRAVITY with respect to _BASE coordinate frame:  (KILOGRAM * MM^2)
+
+INERTIA TENSOR:
+Ixx Ixy Ixz  7.2294454e+03  2.6384265e+00  2.0895021e+02
+Iyx Iyy Iyz  2.6384265e+00  1.1603342e+04  3.4635796e+00
+Izx Izy Izz  2.0895021e+02  3.4635796e+00  1.7217954e+04
+
+PRINCIPAL MOMENTS OF INERTIA:  (KILOGRAM * MM^2)
+I1  I2  I3   7.2250748e+03  1.1603342e+04  1.7222326e+04
+
+ROTATION MATRIX from _BASE orientation to PRINCIPAL AXES:
+       0.99978        0.00057        0.02091
+      -0.00059        1.00000        0.00063
+      -0.02091       -0.00064        0.99978
+
+ROTATION ANGLES from _BASE orientation to PRINCIPAL AXES (degrees):
+angles about x  y  z   0.000          1.198          0.000 
+
+RADII OF GYRATION with respect to PRINCIPAL AXES:
+R1  R2  R3 5.5815782e+01  7.0733864e+01  8.6175089e+01  MM
+
+---------------------------------------------
+
+MASS PROPERTIES OF COMPONENTS OF THE ASSEMBLY
+(in assembly units and the _BASE coordinate frame)
+
+   DENSITY             MASS          C.G.:  X        Y         Z
+
+                  BESSA1206PT_00            MATERIAL:                              UNKNOWN
+         2.93435e-06  2.31915e+00  1.38362e+01  8.22833e-02 -3.05190e+01
